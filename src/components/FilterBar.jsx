@@ -4,10 +4,10 @@ import { setFilter } from "../features/tasks/taskSlice";
 
 const FilterBar = () => {
   const dispatch = useDispatch();
-  const currentFilter = useSelector((state) => state.tasks.filter); // Get the current filter
+  const currentFilter = useSelector((state) => state.tasks.filter);
 
   return (
-    <div className="flex justify-center gap-4 mb-6">
+    <div className="flex flex-wrap justify-center gap-4 mb-6">
       {["all", "completed", "pending", "overdue"].map((filter) => (
         <button
           key={filter}

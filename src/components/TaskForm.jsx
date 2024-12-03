@@ -16,10 +16,12 @@ const TaskForm = () => {
 
   return (
     <form
-      className="bg-white shadow-md rounded-lg p-6 flex flex-col gap-4 max-w-md"
+      className="bg-white shadow-md rounded-lg p-6 flex flex-col gap-4 max-w-md mx-auto sm:p-8 lg:max-w-lg"
       onSubmit={handleSubmit}
     >
-      <h2 className="text-xl font-semibold mb-4 text-gray-800">Add Task</h2>
+      <h2 className="text-xl font-semibold mb-4 text-gray-800 text-center md:text-2xl">
+        Add Task
+      </h2>
       <input
         type="text"
         placeholder="Title"
@@ -36,7 +38,6 @@ const TaskForm = () => {
       />
       <input
         type="date"
-        placeholder="DD-MM-YY"
         className="border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
         value={task.dueDate}
         onChange={(e) => setTask({ ...task, dueDate: e.target.value })}
@@ -44,7 +45,7 @@ const TaskForm = () => {
       />
       <button
         type="submit"
-        className="bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition"
+        className="bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition w-full sm:w-auto"
       >
         Add Task
       </button>

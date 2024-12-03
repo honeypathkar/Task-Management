@@ -3,6 +3,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toggleComplete, deleteTask } from "../features/tasks/taskSlice";
 import { toast } from "react-toastify";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import PendingActionsIcon from "@mui/icons-material/PendingActions";
+import DoneIcon from "@mui/icons-material/Done";
 
 const TaskList = () => {
   const { tasks, filter } = useSelector((state) => state.tasks);
@@ -33,57 +37,60 @@ const TaskList = () => {
   };
 
   return (
-    <div className="bg-white shadow-md rounded-lg p-6 max-w-4xl">
-      <h2 className="text-xl font-semibold mb-4 text-gray-800">
+    <div className="bg-white shadow-md rounded-lg p-6 max-w-5xl mx-auto md:p-8">
+      <h2 className="text-xl font-semibold mb-4 text-gray-800 text-center md:text-2xl">
         Task List ({filteredTasks.length})
       </h2>
       {filteredTasks.length === 0 ? (
         <div className="text-center text-gray-500">No tasks yet</div>
       ) : (
-        <ul className="space-y-4">
+        <ul className="space-y-6">
           {filteredTasks.map((task) => (
             <li
               key={task.id}
-              className="flex justify-between items-center p-4 bg-gray-100 rounded-lg hover:bg-gray-200 transition"
+              className="flex flex-col md:flex-row justify-between items-start md:items-center p-6 bg-gray-100 rounded-lg hover:bg-gray-200 transition"
             >
               <div
-                className="cursor-pointer"
+                className="cursor-pointer flex-1"
                 onClick={() => navigate(`/task/${task.id}`)}
               >
-                <h3 className="text-lg font-bold">{task.title}</h3>
-                <p className="text-sm text-gray-600">
-                  {" "}
-                  {truncateDescription(task.description, 20)}
+                <h3 className="text-lg font-bold text-gray-800">
+                  {task.title}
+                </h3>
+                <p className="text-sm text-gray-600 mt-1">
+                  {truncateDescription(task.description, 30)}
                 </p>
-                <p className="text-sm text-gray-600">Due: {task.dueDate}</p>
+                <p className="text-sm text-gray-500 mt-2">
+                  Due: {task.dueDate}
+                </p>
               </div>
-              <div className="flex space-x-2">
+              <div className="flex space-x-3 mt-4 md:mt-0 md:ml-6">
                 <button
                   onClick={() => navigate(`/edit-task/${task.id}`)}
-                  className="px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600 transition"
+                  className="px-3 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 transition"
                 >
-                  Edit
+                  <EditIcon />
                 </button>
                 <button
                   onClick={() => {
                     toggleTask(task.id);
                     task.completed
-                      ? toast.success("Mark as Pending")
-                      : toast.success("Mark as Completed");
+                      ? toast.success("Marked as Pending")
+                      : toast.success("Marked as Completed");
                   }}
-                  className={`px-3 py-1 rounded ${
+                  className={`px-3 py-2 rounded ${
                     task.completed
                       ? "bg-green-500 text-white hover:bg-green-600"
                       : "bg-blue-500 text-white hover:bg-blue-600"
                   } transition`}
                 >
-                  {task.completed ? "Pending" : "Complete"}
+                  {task.completed ? <PendingActionsIcon /> : <DoneIcon />}
                 </button>
                 <button
                   onClick={() => taskDelete(task.id)}
-                  className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600 transition"
+                  className="px-3 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition"
                 >
-                  Delete
+                  <DeleteIcon />
                 </button>
               </div>
             </li>
