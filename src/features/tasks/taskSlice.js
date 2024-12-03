@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { compareAsc } from "date-fns";
 
 const initialState = {
   tasks: [],
@@ -27,7 +26,9 @@ const tasksSlice = createSlice({
     },
     toggleComplete: (state, action) => {
       const task = state.tasks.find((task) => task.id === action.payload);
-      if (task) task.completed = !task.completed;
+      if (task) {
+        task.completed = !task.completed;
+      }
     },
     setFilter: (state, action) => {
       state.filter = action.payload;
@@ -37,4 +38,5 @@ const tasksSlice = createSlice({
 
 export const { addTask, editTask, deleteTask, toggleComplete, setFilter } =
   tasksSlice.actions;
+
 export default tasksSlice.reducer;

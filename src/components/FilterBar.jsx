@@ -7,14 +7,14 @@ const FilterBar = () => {
   const currentFilter = useSelector((state) => state.tasks.filter);
 
   return (
-    <div className="flex flex-wrap justify-center gap-4 mb-6">
+    <div className="flex justify-center gap-2 mb-6 sm:flex-nowrap">
       {["all", "completed", "pending", "overdue"].map((filter) => (
         <button
           key={filter}
           onClick={() => dispatch(setFilter(filter))}
           className={`py-2 px-4 rounded transition ${
             currentFilter === filter
-              ? "bg-blue-700 text-white"
+              ? "bg-blue-700 text-white border-2 border-blue-700"
               : "bg-white text-blue-500 border-2 border-blue-700"
           }`}
         >
