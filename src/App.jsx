@@ -2,9 +2,9 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./store";
-import TaskDashboard from "./components/TaskDashborad";
-import TaskDetails from "./components/TaskDetails";
-import EditTask from "./components/EditTask";
+import TaskDashboard from "./screens/TaskDashborad";
+import TaskDetails from "./screens/TaskDetails";
+import EditTask from "./screens/EditTask";
 import Alert from "./components/Alert";
 
 const App = () => {
