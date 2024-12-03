@@ -15,7 +15,7 @@ const FilterBar = () => {
           className={`py-2 px-4 rounded transition ${
             currentFilter === filter
               ? "bg-blue-700 text-white"
-              : "bg-blue-500 text-white hover:bg-blue-600"
+              : "bg-white text-blue-500 border-2 border-blue-700"
           }`}
         >
           {filter.charAt(0).toUpperCase() + filter.slice(1)}

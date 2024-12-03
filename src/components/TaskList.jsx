@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toggleComplete, deleteTask } from "../features/tasks/taskSlice";
+import { toast } from "react-toastify";
 
 const TaskList = () => {
   const { tasks, filter } = useSelector((state) => state.tasks);
@@ -22,9 +23,20 @@ const TaskList = () => {
       : description;
   };
 
+  const taskDelete = (id) => {
+    dispatch(deleteTask(id));
+    toast.success("Task Deleted");
+  };
+
+  const toggleTask = (id) => {
+    dispatch(toggleComplete(id));
+  };
+
   return (
     <div className="bg-white shadow-md rounded-lg p-6 max-w-4xl">
-      <h2 className="text-xl font-semibold mb-4 text-gray-800">Task List</h2>
+      <h2 className="text-xl font-semibold mb-4 text-gray-800">
+        Task List ({filteredTasks.length})
+      </h2>
       {filteredTasks.length === 0 ? (
         <div className="text-center text-gray-500">No tasks yet</div>
       ) : (
@@ -41,7 +53,7 @@ const TaskList = () => {
                 <h3 className="text-lg font-bold">{task.title}</h3>
                 <p className="text-sm text-gray-600">
                   {" "}
-                  {truncateDescription(task.description, 30)}
+                  {truncateDescription(task.description, 20)}
                 </p>
                 <p className="text-sm text-gray-600">Due: {task.dueDate}</p>
               </div>
@@ -53,7 +65,12 @@ const TaskList = () => {
                   Edit
                 </button>
                 <button
-                  onClick={() => dispatch(toggleComplete(task.id))}
+                  onClick={() => {
+                    toggleTask(task.id);
+                    task.completed
+                      ? toast.success("Mark as Pending")
+                      : toast.success("Mark as Completed");
+                  }}
                   className={`px-3 py-1 rounded ${
                     task.completed
                       ? "bg-green-500 text-white hover:bg-green-600"
@@ -63,7 +80,7 @@ const TaskList = () => {
                   {task.completed ? "Pending" : "Complete"}
                 </button>
                 <button
-                  onClick={() => dispatch(deleteTask(task.id))}
+                  onClick={() => taskDelete(task.id)}
                   className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600 transition"
                 >
                   Delete

@@ -5,6 +5,7 @@ import store from "./store";
 import TaskDashboard from "./components/TaskDashborad";
 import TaskDetails from "./components/TaskDetails";
 import EditTask from "./components/EditTask";
+import Alert from "./components/Alert";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
             <Route path="task/:id" element={<TaskDetails />} />
             <Route path="/edit-task/:id" element={<EditTask />} />
           </Routes>
+          <Alert />
         </div>
       </Router>
     </Provider>

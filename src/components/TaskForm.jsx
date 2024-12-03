@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addTask } from "../features/tasks/taskSlice";
+import { toast } from "react-toastify";
 
 const TaskForm = () => {
   const dispatch = useDispatch();
@@ -10,6 +11,7 @@ const TaskForm = () => {
     e.preventDefault();
     dispatch(addTask({ ...task, id: Date.now(), completed: false }));
     setTask({ title: "", description: "", dueDate: "" });
+    toast.success("Task Added");
   };
 
   return (
